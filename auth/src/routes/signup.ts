@@ -40,7 +40,7 @@ router.post(
         id: user.id,
         email: user.email,
       },
-      'pippo'
+      process.env.JWT_KEY!
     );
     // store jwt in session object
     //--> the object below is made this way because of typescript interface

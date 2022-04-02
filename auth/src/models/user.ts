@@ -30,6 +30,15 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.set('toJSON', {
+  transform(doc: any, ret: any) {
+    ret.id = ret._id;
+    delete ret._id;
+    delete ret.password;
+    delete ret.__v;
+  },
+});
+
 // not arrow function to refer This as an inside parameter,
 // isModified is a mongo DB method to check if the password in db is inserted / modified
 userSchema.pre('save', async function (done) {
