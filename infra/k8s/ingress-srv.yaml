@@ -14,7 +14,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: posts-clusterip-srv
+                name: auth-srv
                 port:
-                  number: 4000
+                  number: 3000
 #https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/cloud/deploy.yaml
