@@ -1,10 +1,16 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
+import request from 'supertest';
 import { app } from '../app';
-// @ts-ignore
-let mongo;
+
+declare global {
+  var signin: () => Promise<string[]>;
+}
+
+let mongo: any;
 
 beforeAll(async () => {
+  // different block of code to fix issur wuth mongo.getUri --> need to stay this way
   mongo = await MongoMemoryServer.create();
   process.env.JWT_KEY = 'asdfj';
   const uri = mongo.getUri();
@@ -20,7 +26,23 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  // @ts-ignore
   await mongo.stop();
   await mongoose.connection.close();
 });
+
+global.signin = async () => {
+  const email = 'test@test.com';
+  const password = 'password';
+
+  const response = await request(app)
+    .post('/api/users/signup')
+    .send({
+      email,
+      password,
+    })
+    .expect(201);
+
+  const cookie = response.get('Set-Cookie');
+
+  return cookie;
+};
