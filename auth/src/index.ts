@@ -8,7 +8,6 @@ const start = async () => {
   }
   try {
     await mongoose.connect('mongodb://auth-mongo-srv:27017/auth');
-    console.log('connected to mongoDB');
   } catch (err) {
     console.log(err);
   }
