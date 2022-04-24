@@ -1,35 +1,39 @@
-import { lorem } from 'faker/locale/zh_TW';
 import { useState } from 'react';
+import axios from 'axios';
 
 export default () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSubmit = (e) => {
-    e.preventDefault;
-    console.log(' email ' + email + ' password ' + password);
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const response = await axios.post('/api/users/signup', {
+      email,
+      password,
+    });
+    console.log(response.data);
   };
   return (
     <form onSubmit={onSubmit}>
       <h1>Sign up</h1>
-      <div className="from-group">
+      <div className="form-group">
         <label htmlFor="">Email Address</label>
         <input
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
-          className="from-control"
+          className="form-control"
         />
       </div>
-      <div className="from-group">
+      <div className="form-group">
         <label htmlFor="">Password</label>
         <input
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
           }}
-          className="from-control"
+          className="form-control"
         />
       </div>
       <button className="btn-primary">Sign up</button>
