@@ -43,7 +43,6 @@ router.post(
     );
     // store jwt in session object
     //--> the object below is made this way because of typescript interface
-
     req.session = {
       jwt: userJwt,
     };
