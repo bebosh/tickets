@@ -7,9 +7,8 @@ const Header = ({ currentUser }) => {
     currentUser && { label: "Sell Tickets", href: "/tickets/new" },
     currentUser && { label: "My Orders", href: "/orders" },
     currentUser && { label: "Sign Out", href: "/auth/signout" },
-  ]
-    .filter((linkConfig) => linkConfig)
-    .map(({ label, href }) => {
+  ].filter((linkConfig) => linkConfig).map(({ label, href }) => {
+
       return (
         <li key={href} className="nav-item">
           <Link href={href}>
