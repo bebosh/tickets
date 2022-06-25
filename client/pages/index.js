@@ -2,7 +2,7 @@ import buildClient from "../api/build-client";
 import BaseLayout from "../components/BaseLayout";
 
 const LandingPage = ({ currentUser }) => {
-
+  
   return (
      <BaseLayout currentUser={ currentUser }>
       {currentUser ? (
@@ -16,6 +16,7 @@ const LandingPage = ({ currentUser }) => {
 
  export const getServerSideProps = async (context) => {
   const client = buildClient(context);
+  
   const { data } = await client.get("/api/users/currentuser");
   return { props: { currentUser: data } };
    };
